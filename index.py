@@ -16,7 +16,6 @@ app = Flask(__name__)
 # CORS implemented so that we don't get errors when trying to access the server from a different server location
 CORS(app)
 
-
 try:
     con = psycopg2.connect(
         database=DATABASE,
