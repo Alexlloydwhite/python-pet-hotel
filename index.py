@@ -27,7 +27,7 @@ try:
     # GET: Fetch all movies from the database
     @app.route('/')
     def fetch_all_pets():
-        cur.execute('SELECT * FROM pets')
+        cur.execute('SELECT * FROM pets p JOIN "owner" o ON o.id = p.owner_id;')
         rows = cur.fetchall()
         pet_data = []
         for row in rows:
@@ -38,8 +38,11 @@ try:
                 'breed': row[3],
                 'color': row[4],
                 'checked_in': row[5],
-                'checked_in_date': row[6]
+                'checked_in_date': row[6],
+                'owner_name': row[8]
             })
+
+            print(rows)
     
         return jsonify(pet_data)
     
