@@ -27,9 +27,15 @@ try:
     # GET: Fetch all movies from the database
     @app.route('/')
     def fetch_all_pets():
+    
+        # SQL query to get data from pets / owner table
         cur.execute('SELECT * FROM pets p JOIN "owner" o ON o.id = p.owner_id;')
         rows = cur.fetchall()
+        
+        # Empty array to hold pet data
         pet_data = []
+
+        # Loop over rows from DB
         for row in rows:
             pet_data.append({
                 'pet_id': row[0],
@@ -41,9 +47,10 @@ try:
                 'checked_in_date': row[6],
                 'owner_name': row[8]
             })
-
+            # To change above data structure, check the index and adjust accordingly
             print(rows)
-    
+
+        # From this end point, return the pet_data array
         return jsonify(pet_data)
     
     # MORE ROUTES HERE!!
