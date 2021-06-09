@@ -29,9 +29,19 @@ try:
     def fetch_all_pets():
         cur.execute('SELECT * FROM pets')
         rows = cur.fetchall()
-        print(rows)
-
-        return jsonify(rows)
+        pet_data = []
+        for row in rows:
+            pet_data.append({
+                'pet_id': row[0],
+                'owner_id': row[1],
+                'name': row[2],
+                'breed': row[3],
+                'color': row[4],
+                'checked_in': row[5],
+                'checked_in_date': row[6]
+            })
+    
+        return jsonify(pet_data)
     
     # MORE ROUTES HERE!!
 
