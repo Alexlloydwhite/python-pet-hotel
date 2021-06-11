@@ -9,9 +9,11 @@ app.config["DEBUG"] = True
 
 connection = psycopg2.connect(
     host='localhost',
-    port='5432',
-    database='pet-hotel'
+    port="5432",
+    database="pet-hotel"
 )
+
+CORS(app)
 
 app.route('/')
 def hello():
