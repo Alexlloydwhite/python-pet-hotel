@@ -1,11 +1,10 @@
-import flask
+from flask import Flask
 import psycopg2
 from flask_cors import CORS
 from flask import request, jsonify
 from psycopg2.extras import RealDictCursor
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app = Flask(__name__)
 
 connection = psycopg2.connect(
     host='localhost',
@@ -15,11 +14,11 @@ connection = psycopg2.connect(
 
 CORS(app)
 
-app.route('/')
+@app.route('/')
 def hello():
     return 'Hello'
 
-app.route('/api/pets/', methods=['GET'])
+@app.route('/api/pets/', methods=['GET'])
 def fetch_all_pets():
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
