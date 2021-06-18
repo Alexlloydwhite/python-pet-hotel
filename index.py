@@ -18,7 +18,7 @@ CORS(app)
 def hello():
     return 'Hello'
 
-@app.route('/api/pets/', methods=['GET'])
+@app.route('/api/pets', methods=['GET'])
 def fetch_all_pets():
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
@@ -27,3 +27,8 @@ def fetch_all_pets():
     pets = cursor.fetchall()
     print(pets)
     return jsonify(pets)
+
+@app.route('/api/pets', methods=['POST'])
+def add_pet():
+    print(request.json)
+    return 200
